@@ -1,0 +1,13 @@
+#cloud-config
+package_update: true
+packages:
+  - docker.io
+  - docker-compose
+  - git
+
+runcmd:
+  - systemctl start docker
+  - systemctl enable docker
+  - git clone https://github.com/ask22me/openmeta-data.git /opt/openmetadata
+  - cd /opt/openmetadata
+  - docker-compose up -d
