@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  openmetadata:
+    image: openmetadata/openmetadata:latest
+    container_name: openmetadata
+    ports:
+      - "8585:8585"
+    environment:
+      - OPENMETADATA_SERVER_HOST=openmetadata
+      - OPENMETADATA_SERVER_PORT=8585
+      - DB_SERVICE_NAME=mysql
+      - DATABASE_HOST=${MYSQL_HOST}
+      - DATABASE_PORT=${MYSQL_PORT}
+      - DATABASE_USER=${MYSQL_USER}
+      - DATABASE_PASSWORD=${MYSQL_PASSWORD}
+      - DATABASE_NAME=${MYSQL_DB}
+    networks:
+      - openmetadata_network
+    restart: unless-stopped
+
+networks:
+  openmetadata_network:
+    driver: bridge
